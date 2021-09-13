@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Color</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .right-panel {
+            padding: 13px 15px 13px 30px;
+            background-color: #b5b5b5;
+        }
+        
+        .second .right-panel {
+            padding: 31px 15px 31px 30px;
+        }
+        
+        .right-panel>div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 210px;
+        }
+        
+        .left-panel {
+            padding: 10px;
+            background-color: #eee;
+            border: 1px solid #ccc;
+        }
+        
+        .left-panel img.food {
+            border: 1px solid #cecece;
+            padding: 2px;
+            margin: 2px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 7px 0px rgb(158 158 158 / 69%);
+            opacity: 0.5;
+            transition: all .2s ease-in-out;
+        }
+        
+        .progress-container {
+            height: 10px;
+            border-radius: 5px;
+            background-color: #f4f3f0;
+            width: 100px;
+        }
+        
+        .progress-container .progress {
+            height: 100%;
+            width: 0;
+            border-radius: 5px;
+            background: #e5e4dc;
+            transition: width 0.4s ease;
+        }
+        
+        #Sweet {
+            background-color: #9c27b0;
+        }
+        
+        #Sour {
+            background-color: #f44336;
+        }
+        
+        #Salty {
+            background-color: #cddc39;
+        }
+        
+        #Bitter {
+            background-color: #ffc107;
+        }
+        
+        #Green {
+            background-color: #8bc34a;
+        }
+        
+        #Blue {
+            background-color: #2196f3;
+        }
+        
+        #Brightness {
+            background-color: #949494;
+        }
+        
+        .girl {
+            width: 220px;
+            height: 126px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="left-panel">
+            <div>
+                <img class="food" src="Asset 6.png" onmouseover="hoverImage(this, 1)" />
+                <img class="food" src="Asset 1.png" onmouseover="hoverImage(this, 2)" />
+                <img class="food" src="Asset 8.png" onmouseover="hoverImage(this, 3)" />
+                <img class="food" src="Asset 2.png" onmouseover="hoverImage(this, 4)" />
+            </div>
+            <div>
+                <img class="food" src="Asset 3.png" onmouseover="hoverImage(this, 5)" />
+                <img class="food" src="Asset 5.png" onmouseover="hoverImage(this, 6)" />
+                <img class="food" src="Asset 4.png" onmouseover="hoverImage(this, 7)" />
+                <img class="food" src="Asset 7.png" onmouseover="hoverImage(this, 8)" />
+            </div>
+        </div>
+        <div class="right-panel">
+            <label><i>Tastes:</i></label>
+            <hr>
+            <div>
+                <label>Sweet:</label>
+                <div class="progress-container">
+                    <div class="progress" id="Sweet"></div>
+                </div>
+            </div>
+            <div>
+                <label>Sour:</label>
+                <div class="progress-container">
+                    <div class="progress" id="Sour"></div>
+                </div>
+            </div>
+            <div>
+                <label>Salty:</label>
+                <div class="progress-container">
+                    <div class="progress" id="Salty"></div>
+                </div>
+            </div>
+            <div>
+                <label>Bitter:</label>
+                <div class="progress-container">
+                    <div class="progress" id="Bitter"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="main second">
+        <div class="left-panel">
+            <img class="girl" src="renoir girl can - upper.jpg" id="girl" />
+        </div>
+        <div class="right-panel">
+            <label><i>Colors:</i></label>
+            <hr>
+            <div>
+                <label>Green or red:</label>
+                <div class="progress-container">
+                    <div class="progress" id="Green"></div>
+                </div>
+            </div>
+            <div>
+                <label>Blue or yellow:</label>
+                <div class="progress-container">
+                    <div class="progress" id="Blue"></div>
+                </div>
+            </div>
+            <div>
+                <label>Brightness:</label>
+                <div class="progress-container">
+                    <div class="progress" id="Brightness"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    const progressbar = [
+        document.querySelector("#Sweet"),
+        document.querySelector("#Sour"),
+        document.querySelector("#Salty"),
+        document.querySelector("#Bitter"),
+        document.querySelector("#Green"),
+        document.querySelector("#Blue"),
+        document.querySelector("#Brightness")
+    ];
+
+    const changeProgress = [];
+
+    for (let index = 0; index < 7; index++) {
+        changeProgress[index] = (progress, color) => {
+            progressbar[index].style.width = `${progress}%`;
+            progressbar[index].style.backgroundColor = `${color}`;
+        };
+    }
+
+    const data = [
+        [100, 25, 0, 0],
+        [25, 0, 100, 0],
+        [25, 100, 75, 0],
+        [0, 20, 0, 100],
+        [25, 100, 0, 25],
+        [25, 25, 50, 0],
+        [100, 0, 25, 0],
+        [20, 0, 0, 80]
+    ];
+
+    function hoverImage(object, inx) {
+
+        const highlightedItems = document.querySelectorAll("img.food");
+
+        highlightedItems.forEach(function(userItem) {
+            userItem.style.opacity = 0.5;
+            object.style.transform = 'scale(1)';
+        });
+
+        object.style.opacity = 1;
+        object.style.transform = 'scale(1.1)';
+
+        /* change progress after 0.2 second (only for showcase) */
+        changeProgress[0](data[inx - 1][0], '#9c27b0');
+        changeProgress[1](data[inx - 1][1], '#f44336');
+        changeProgress[2](data[inx - 1][2], '#cddc39');
+        changeProgress[3](data[inx - 1][3], '#ffc107');
+    }
+
+    //select girl image
+    let girl = document.getElementById("girl");
+
+    //from green (120) to red(0) 
+    //from blue (240) to yellow (360 + 60)
+
+    // This handler will be executed only once when the cursor
+    girl.addEventListener("mousemove", function(event) {
+        if (!this.canvas) {
+            this.canvas = document.createElement('canvas');
+            this.canvas.width = this.width;
+            this.canvas.height = this.height;
+            this.canvas.getContext('2d').drawImage(this, 0, 0, this.width, this.height);
+        }
+
+        var pixelData = this.canvas.getContext('2d').getImageData(event.offsetX, event.offsetY, 1, 1).data;
+        var yellow = (pixelData[1] + pixelData[2]) / 2;
+        //green to red
+        changeProgress[6](rgb2lab(pixelData)[0], '#949494');
+
+        if (rgb2lab(pixelData)[1] < 0) {
+            changeProgress[4](rgb2lab(pixelData)[1] * (-3), '#8bc34a');
+        } else {
+            changeProgress[4](rgb2lab(pixelData)[1] * 2, '#e91e63');
+        }
+
+        if (rgb2lab(pixelData)[2] < 0) {
+            changeProgress[5](rgb2lab(pixelData)[2] * (-3), '#3f51b5');
+        } else {
+            changeProgress[5](rgb2lab(pixelData)[2] * 2, '#ffeb3b');
+        }
+    }, false);
+
+    function rgb2lab(rgb) {
+        var r = rgb[0] / 255,
+            g = rgb[1] / 255,
+            b = rgb[2] / 255,
+            x, y, z;
+
+        r = (r > 0.04045) ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92;
+        g = (g > 0.04045) ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92;
+        b = (b > 0.04045) ? Math.pow((b + 0.055) / 1.055, 2.4) : b / 12.92;
+
+        x = (r * 0.4124 + g * 0.3576 + b * 0.1805) / 0.95047;
+        y = (r * 0.2126 + g * 0.7152 + b * 0.0722) / 1.00000;
+        z = (r * 0.0193 + g * 0.1192 + b * 0.9505) / 1.08883;
+
+        x = (x > 0.008856) ? Math.pow(x, 1 / 3) : (7.787 * x) + 16 / 116;
+        y = (y > 0.008856) ? Math.pow(y, 1 / 3) : (7.787 * y) + 16 / 116;
+        z = (z > 0.008856) ? Math.pow(z, 1 / 3) : (7.787 * z) + 16 / 116;
+
+        return [(116 * y) - 16, 500 * (x - y), 200 * (y - z)]
+    }
+</script>
+
+</html>
